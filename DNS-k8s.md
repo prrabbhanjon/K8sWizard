@@ -1,1 +1,3 @@
-
+<p> In Kubernetes, DNS resolution is a critical component for service discovery. When a Pod is deleted and recreated automatically (e.g., by a Deployment or StatefulSet), its IP address may change. However, Kubernetes provides mechanisms to ensure that DNS resolution continues to work seamlessly in such scenarios. Here's how forward and reverse DNS lookups work in Kubernetes and how communication is maintained: </p>
+<h2> 1. Forward Lookup (Service to Pod)</h2>
+<p> Forward lookup is the process of resolving a service name to its IP address. Kubernetes uses CoreDNS (or kube-dns) as the default DNS service to handle this.</p> 
