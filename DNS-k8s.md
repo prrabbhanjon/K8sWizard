@@ -35,8 +35,8 @@
 <ul>
     <li> <h3> Pod Reverse DNS:</h3></li>
   <ul>
-    <li>Kubernetes assigns a reverse DNS name to each Pod in the format: <pod-ip>.<namespace>.pod.cluster.local.</li>
-    <li>Example: If a Pod has the IP 10.244.1.2, its reverse DNS name would be 2.1.244.10.in-addr.arpa.</li> 
+    <li>Kubernetes assigns a reverse DNS name to each Pod in the format: <code style="color : name_color"> <pod-ip>.<namespace>.pod.cluster.local.</code></li>
+    <li>Example: If a Pod has the <code style="color : name_color"> IP 10.244.1.2</code>, its reverse DNS name would be <code style="color : name_color"> 2.1.244.10.in-addr.arpa.</code></li> 
   </ul>
 </ul>
      
@@ -56,4 +56,29 @@
       <li> CoreDNS handles these updates automatically. </li>
   </ul>
 </ul>
-asadf
+
+<!-- This is a Heading line -->
+<h2> 3. Communication in a Dynamic Environment</h2>
+   <p> When Pods are deleted and recreated automatically (e.g., by a Deployment), the following ensures seamless communication: </p>
+<!-- This is a sube heading line -->
+<ul>
+   <li> <h3> Service Abstraction:</h3> </li>
+ <ul>
+    <li>Use Services to abstract Pod IPs. Services provide a stable endpoint (ClusterIP) that does not change even if the underlying Pods are recreated.</li>
+    <li>Applications should communicate with the Service name (e.g., my-service.default.svc.cluster.local) rather than directly with Pod IPs.</li>
+  </ul>
+</ul> 
+<ul>
+<li> <h3>CoreDNS Updates:</h3></li>
+  <ul>
+    <li>CoreDNS continuously watches the Kubernetes API for changes to Services, Endpoints, and Pods. </li>
+    <li> When a Pod is recreated, CoreDNS updates its DNS records to reflect the new Pod IPs.</li>
+  </ul>
+</ul>
+<ul>
+   <li> <h3>Headless Services:</h3></li>
+ <ul>
+    <li> If you need direct Pod-to-Pod communication, you can use a Headless Service (by setting clusterIP: None). This creates DNS records for individual Pods, allowing direct resolution of Pod IPs.</li>
+    <li> Example: A Headless Service named my-headless-service will create DNS records like pod-ip.my-headless-service.default.svc.cluster.local.</li>
+  </ul>
+</ul>
