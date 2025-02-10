@@ -28,6 +28,7 @@
       <li>CoreDNS automatically updates its records to reflect the new Pod IPs associated with the Service.  </li> 
   </ul>
 </ul>
+             
 <!-- This is a 4th line -->
 <h2>2. Reverse Lookup (IP to Name)</h2>
 <p>Reverse lookup is the process of resolving an IP address to a hostname. In Kubernetes, reverse DNS lookup is less commonly used but can be achieved.</p>
@@ -38,13 +39,20 @@
     <li>Example: If a Pod has the IP 10.244.1.2, its reverse DNS name would be 2.1.244.10.in-addr.arpa.</li> 
   </ul>
 </ul>
-
-      
+     
 <!-- This is a 3rd line -->  
-<ul> <h3>Service Reverse DNS:</h3>
-<li> Services do not typically have reverse DNS records because they use ClusterIPs, which are virtual IPs and not tied to a specific Pod.</li> </ul>
+<ul> 
+    <li> <h3>Service Reverse DNS:</h3> </li>
+  <ul>
+    <li> Services do not typically have reverse DNS records because they use ClusterIPs, which are virtual IPs and not tied to a specific Pod.</li> 
+  </ul>
+</ul>
 
 <!-- This is a 3rd line --> 
-<h2>How Reverse Lookup Works When Pods Are Recreated:</h2>h2>
-When a Pod is recreated, its IP changes, and the reverse DNS record is updated accordingly.
-CoreDNS handles these updates automatically.
+<ul>
+   <h3>How Reverse Lookup Works When Pods Are Recreated:</h3> </li>
+  <ul>
+      <li> When a Pod is recreated, its IP changes, and the reverse DNS record is updated accordingly. </li>
+      <li> CoreDNS handles these updates automatically. </li>
+  </ul>
+</ul>
