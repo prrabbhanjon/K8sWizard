@@ -107,4 +107,4 @@
         <li>The Service routes traffic to the new Pod IP <code style="color : name_color">(10.244.1.5) </code>seamlessly.</li>
   </ul>
 </ul> 
-<h3> Best Practices </h3> <a href="https://github.com/prrabbhanjon/K8sWizard/blob/main/DebuggingDNSResolution">click here</a>
+<h3> Best Practices </h3> <a href="https://github.com/prrabbhanjon/K8sWizard/blob/main/DebuggingDNSResolution.md">click here</a>
