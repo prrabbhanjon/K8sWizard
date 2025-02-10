@@ -65,7 +65,7 @@
    <li> <h3> Service Abstraction:</h3> </li>
  <ul>
     <li>Use Services to abstract Pod IPs. Services provide a stable endpoint (ClusterIP) that does not change even if the underlying Pods are recreated.</li>
-    <li>Applications should communicate with the Service name (e.g., my-service.default.svc.cluster.local) rather than directly with Pod IPs.</li>
+    <li>Applications should communicate with the Service name <code style="color : name_color"> (e.g., my-service.default.svc.cluster.local) </code>rather than directly with Pod IPs.</li>
   </ul>
 </ul> 
 <ul>
@@ -78,7 +78,7 @@
 <ul>
    <li> <h3>Headless Services:</h3></li>
  <ul>
-    <li> If you need direct Pod-to-Pod communication, you can use a Headless Service (by setting clusterIP: None). This creates DNS records for individual Pods, allowing direct resolution of Pod IPs.</li>
-    <li> Example: A Headless Service named my-headless-service will create DNS records like pod-ip.my-headless-service.default.svc.cluster.local.</li>
+    <li> If you need direct Pod-to-Pod communication, you can use a Headless Service <code style="color : name_color">(by setting clusterIP: None).</code> This creates DNS records for individual Pods, allowing direct resolution of Pod IPs.</li>
+    <li> Example: A Headless Service named my-headless-service will create DNS records like <code style="color : name_color"> pod-ip.my-headless-service.default.svc.cluster.local.</code></li>
   </ul>
 </ul>
