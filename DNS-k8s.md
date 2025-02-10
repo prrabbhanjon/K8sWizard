@@ -82,3 +82,28 @@
     <li> Example: A Headless Service named my-headless-service will create DNS records like <code style="color : name_color"> pod-ip.my-headless-service.default.svc.cluster.local.</code></li>
   </ul>
 </ul>
+
+<!-- This is a Heading line -->
+<h2>4. Example Scenario</h2>
+ <p>Let’s say you have a Deployment with 3 Pods and a Service named my-service.</p>
+ <ul>
+   <li> <h3> Initial State:</h3> </li>
+   <ul>
+       <li>Pods have IPs: 10.244.1.2, 10.244.1.3, 10.244.1.4.</li>
+       <li>Service my-service resolves to these IPs.</li>
+    </ul>
+</ul> 
+<ul>
+   <li> <h3> Pod Deletion and Recreation:</h3> </li>
+ <ul>
+    <li>One Pod (10.244.1.2) is deleted and recreated with a new IP: 10.244.1.5.</li>
+    <li>CoreDNS updates the DNS records for my-service to include the new IP (10.244.1.5) and removes the old IP (10.244.1.2).</li>
+    </ul>
+</ul> 
+ <ul>
+   <li> <h3>Communication:</h3> </li>
+  <ul>
+       <li>Applications continue to use my-service.default.svc.cluster.local to communicate.</li>
+        <li>The Service routes traffic to the new Pod IP (10.244.1.5) seamlessly.</li>
+  </ul>
+</ul> 
