@@ -1,10 +1,11 @@
-Kubeadm init phase preflight,  certs, kubeconfig, kubelet-start, control-plane.
-Addons:
-- Installs a DNS server (CoreDNS) and the cube-proxy add-on components via API server
-- Kube-Proxy is a network proxy, which runs on each nodes.
-CoreDNS
-1. Coredns —> kube-system
-2. coredns —> cube-system Note: Two replicas.
-Prrabbhanjon@ ~ % kubectl get pod -n kube-system -o wide | grep core
-coredns-55cb58b774-8dpcw                 1/1     Running   3 (143m ago)   160m   10.1.0.68      docker-desktop   <none>           <none>
-coredns-55cb58b774-xqsb5                 1/1     Running   3 (143m ago)   160m   10.1.0.67      docker-desktop   <none>           <none>
+Scenario Setup
+
+Namespace: k8-dns
+Components:
+A Deployment with 2 Pods running a simple web server.
+A Service to expose the Pods.
+A Headless Service for direct Pod DNS resolution.
+Objective: Validate DNS resolutions for both forward and reverse lookups.
+Step 1: Create the Namespace
+
+yaml
