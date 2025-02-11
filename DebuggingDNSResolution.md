@@ -4,9 +4,9 @@
     <p><strong>Namespace:</strong> k8-dns </p>
     <p><strong>Components:</strong> </p>
     <ul>
-        <li>A Deployment with 2 Pods running a simple web server. </li>
-        <li>A Service to expose the Pods.</li>
-        <li>A Headless Service for direct Pod DNS resolution. </li>
+        <li>A <strong>Deployment </strong>with 2 Pods running a simple web server. </li>
+        <li>A <strong>Service </strong>to expose the Pods.</li>
+        <li>A <strong>Headless Service</strong> for direct Pod DNS resolution. </li>
     </ul>
     <p><strong>Objective:</strong> Validate DNS resolutions for both forward and reverse lookups.</p
 </div>
@@ -93,26 +93,30 @@ spec:
         <h3>Step 5: Validate DNS Resolutions</h3>
         <h4>1. Forward Lookup for Service</h4>
         <p>Resolve the Service name (web-service) to its ClusterIP:</p>
-        <pre lang="java" class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test -- nslookup web-service.k8-dns.svc.cluster.local</pre>
-        <p><strong>Expected Output:</strong></p>
+        <pre lang="java" class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test \
+            -- nslookup web-service.k8-dns.svc.cluster.local</pre>
+        <p><strong>Expected Output:</strong></p> 
         <pre>
 Server:    10.96.0.10
 Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
 Name:      web-service.k8-dns.svc.cluster.local
 Address 1: 10.96.123.45 web-service.k8-dns.svc.cluster.local</pre>
-
-        <h4>2. Forward Lookup for Headless Service</h4>
-        <pre class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test -- nslookup web-headless.k8-dns.svc.cluster.local</pre>
-        <p><strong>Expected Output:</strong></p>
-        <pre>
-Server:    10.96.0.10
+</div>
+<!-- This is a heading line -->  
+  <div class="step">     
+        <h3> 2. Forward Lookup for Headless Service </h3>
+        <pre class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test \
+        -- nslookup web-headless.k8-dns.svc.cluster.local</pre>
+        <p><strong>Expected Output:</strong></p>  
+        <pre>Server:    10.96.0.10
 Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
 Name:      web-headless.k8-dns.svc.cluster.local
 Address 1: 10.244.1.2 web-app-12345-abcde.k8-dns.pod.cluster.local
-Address 2: 10.244.1.3 web-app-67890-fghij.k8-dns.pod.cluster.local
-        </pre>
-        
-        <h4>3. Reverse Lookup for Pod IPs</h4>
+Address 2: 10.244.1.3 web-app-67890-fghij.k8-dns.pod.cluster.local </pre>
+  </div> 
+  <!-- This is a heading line -->
+    <div class="step"> 
+          <h4>3. Reverse Lookup for Pod IPs</h4>
         <pre class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test -- nslookup &lt;pod-ip&gt;</pre>
         <p>Replace <code>&lt;pod-ip&gt;</code> with one of the Pod IPs from the Headless Service output (e.g., 10.244.1.2).</p>
         <p><strong>Expected Output:</strong></p>
@@ -135,11 +139,12 @@ Address 1: 10.244.1.2 web-app-12345-abcde.k8-dns.pod.cluster.local</pre>
         </ul>
     </div>
 <!-- This is a heading line -->  
+<div class="step"> 
     <h2>Key Takeaways</h2>
     <ul>
         <li><strong>Service DNS:</strong> Provides a stable endpoint for accessing Pods, even when Pod IPs change.</li>
         <li><strong>Headless Service DNS:</strong> Allows direct resolution of individual Pod IPs.</li>
         <li><strong>Reverse DNS:</strong> Maps Pod IPs back to their DNS names.</li>
         <li><strong>CoreDNS:</strong> Automatically updates DNS records when Pods are recreated.</li>
-    </ul>
+     </ul>
 </div>
