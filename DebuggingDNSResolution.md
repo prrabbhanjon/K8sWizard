@@ -120,7 +120,26 @@ namespace/k8-dns created
 service/web-service created
 deployment.apps/web-app created
 service/web-headless created</pre></div>
-    
+
+<!-- This is a heading line --> 
+
+<div class="step">     
+        <pre class="command">kubectl get all -n k8-dns 
+NAME                           READY   STATUS    RESTARTS   AGE
+pod/web-app-65d846d465-pt2sb   1/1     Running   0          53m
+pod/web-app-65d846d465-xqclv   1/1     Running   0          53m
+
+NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+service/web-headless   ClusterIP   None           <none>        80/TCP    53m
+service/web-service    ClusterIP   10.96.144.65   <none>        80/TCP    53m
+
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/web-app   2/2     2            2           53m
+
+NAME                                 DESIRED   CURRENT   READY   AGE
+replicaset.apps/web-app-65d846d465   2         2         2       53m
+        </pre>
+</div>
 <!-- This is a heading line -->  
   <div class="step">     
         <h3> 2. Forward Lookup for Headless Service </h3>
