@@ -1,31 +1,29 @@
-<h2> Scenario Setup</h2> 
-
-Namespace: k8-dns
-Components:
-A Deployment with 2 Pods running a simple web server.
-A Service to expose the Pods.
-A Headless Service for direct Pod DNS resolution.
-Objective: Validate DNS resolutions for both forward and reverse lookups.
-Step 1: Create the Namespace
-
-yaml
-yaml
-Copy
+<div class="container">
+    <h1>Scenario Setup</h1>
+    <p><strong>Namespace:</strong> k8-dns</p>
+    <p><strong>Components:</strong></p>
+    <ul>
+        <li>A Deployment with 2 Pods running a simple web server.</li>
+        <li>A Service to expose the Pods.</li>
+        <li>A Headless Service for direct Pod DNS resolution.</li>
+    </ul>
+    <p><strong>Objective:</strong> Validate DNS resolutions for both forward and reverse lookups.</p>
+    <div class="step">
+        <h3>Step 1: Create the Namespace</h3>
+        <pre lang="java">
 apiVersion: v1
 kind: Namespace
 metadata:
   name: k8-dns
-Apply the manifest:
+        </pre>
+        <p>Apply the manifest:</p>
+        <pre lang="java" class="command">kubectl apply -f namespace.yaml</pre>
+    </div>
 
-bash
-Copy
-kubectl apply -f namespace.yaml
-Step 2: Create a Deployment
-
-Create a Deployment with 2 Pods running an nginx web server:
-
-yaml
-Copy
+    <div class="step">
+        <h3>Step 2: Create a Deployment</h3>
+        <p>Create a Deployment with 2 Pods running an nginx web server:</p>
+        <pre lang="java">
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -44,16 +42,15 @@ spec:
       containers:
       - name: nginx
         image: nginx
-Apply the manifest:
+        </pre>
+        <p>Apply the manifest:</p>
+        <pre lang="java" class="command">kubectl apply -f deployment.yaml</pre>
+    </div>
 
-bash
-kubectl apply -f deployment.yaml
-Step 3: Create a Service
-
-Create a Service to expose the Pods:
-
-yaml
-Copy
+    <div class="step">
+        <h3>Step 3: Create a Service</h3>
+        <p>Create a Service to expose the Pods:</p>
+        <pre lang="java">
 apiVersion: v1
 kind: Service
 metadata:
@@ -65,16 +62,15 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-Apply the manifest:
+        </pre>
+        <p>Apply the manifest:</p>
+        <pre class="command">kubectl apply -f service.yaml</pre>
+    </div>
 
-bash
-Copy
-kubectl apply -f service.yaml
-Step 4: Create a Headless Service
-
-Create a Headless Service for direct Pod DNS resolution:
-
-yaml
+    <div class="step">
+        <h3>Step 4: Create a Headless Service</h3>
+        <p>Create a Headless Service for direct Pod DNS resolution:</p>
+        <pre>
 apiVersion: v1
 kind: Service
 metadata:
@@ -87,73 +83,64 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-Apply the manifest:
+        </pre>
+        <p>Apply the manifest:</p>
+        <pre class="command">kubectl apply -f headless-service.yaml</pre>
+    </div>
 
-bash
-Copy
-kubectl apply -f headless-service.yaml
-Step 5: Validate DNS Resolutions
-
-1. Forward Lookup for Service
-
-Resolve the Service name (web-service) to its ClusterIP:
-
-bash
-Copy
-kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test -- nslookup web-service.k8-dns.svc.cluster.local
-Expected Output:
-
-erver:    10.96.0.10
-Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
-
-Name:      web-service.k8-dns.svc.cluster.local
-Address 1: 10.96.123.45 web-service.k8-dns.svc.cluster.local
-2. Forward Lookup for Headless Service
-
-Resolve the Headless Service name (web-headless) to individual Pod IPs:
-
-bash
-Copy
-kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test -- nslookup web-headless.k8-dns.svc.cluster.local
-Expected Output:
-
-Copy
+    <div class="step">
+        <h3>Step 5: Validate DNS Resolutions</h3>
+        <h4>1. Forward Lookup for Service</h4>
+        <p>Resolve the Service name (web-service) to its ClusterIP:</p>
+        <pre class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test -- nslookup web-service.k8-dns.svc.cluster.local</pre>
+        <p><strong>Expected Output:</strong></p>
+        <pre>
 Server:    10.96.0.10
 Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+Name:      web-service.k8-dns.svc.cluster.local
+Address 1: 10.96.123.45 web-service.k8-dns.svc.cluster.local
+        </pre>
 
+        <h4>2. Forward Lookup for Headless Service</h4>
+        <pre class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test -- nslookup web-headless.k8-dns.svc.cluster.local</pre>
+        <p><strong>Expected Output:</strong></p>
+        <pre>
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
 Name:      web-headless.k8-dns.svc.cluster.local
 Address 1: 10.244.1.2 web-app-12345-abcde.k8-dns.pod.cluster.local
 Address 2: 10.244.1.3 web-app-67890-fghij.k8-dns.pod.cluster.local
-3. Reverse Lookup for Pod IPs
-
-Resolve a Pod IP to its DNS name:
-
-bash
-Copy
-kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test -- nslookup <pod-ip>
-Replace <pod-ip> with one of the Pod IPs from the Headless Service output (e.g., 10.244.1.2).
-
-Expected Output:
-
-Copy
+        </pre>
+        
+        <h4>3. Reverse Lookup for Pod IPs</h4>
+        <pre class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test -- nslookup &lt;pod-ip&gt;</pre>
+        <p>Replace <code>&lt;pod-ip&gt;</code> with one of the Pod IPs from the Headless Service output (e.g., 10.244.1.2).</p>
+        <p><strong>Expected Output:</strong></p>
+        <pre>
 Server:    10.96.0.10
 Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
-
 Name:      2.1.244.10.in-addr.arpa
 Address 1: 10.244.1.2 web-app-12345-abcde.k8-dns.pod.cluster.local
-Step 6: Simulate Pod Deletion and Validate DNS
+        </pre>
+    </div>
 
-Delete one of the Pods:
-bash
-Copy
-kubectl delete pod <pod-name> -n k8-dns
-The Deployment will automatically recreate the Pod with a new IP.
-Validate DNS resolution again:
-Check the Headless Service resolution to ensure the new Pod IP is included.
-Perform a reverse lookup for the new Pod IP.
-Key Takeaways
+    <div class="step">
+        <h3>Step 6: Simulate Pod Deletion and Validate DNS</h3>
+        <p>Delete one of the Pods:</p>
+        <pre lang="java" class="command">kubectl delete pod &lt;pod-name&gt; -n k8-dns</pre>
+        <p>The Deployment will automatically recreate the Pod with a new IP.</p>
+        <p>Validate DNS resolution again:</p>
+        <ul>
+            <li>Check the Headless Service resolution to ensure the new Pod IP is included.</li>
+            <li>Perform a reverse lookup for the new Pod IP.</li>
+        </ul>
+    </div>
 
-Service DNS: Provides a stable endpoint for accessing Pods, even when Pod IPs change.
-Headless Service DNS: Allows direct resolution of individual Pod IPs.
-Reverse DNS: Maps Pod IPs back to their DNS names.
-CoreDNS: Automatically updates DNS records when Pods are recreated.
+    <h2>Key Takeaways</h2>
+    <ul>
+        <li><strong>Service DNS:</strong> Provides a stable endpoint for accessing Pods, even when Pod IPs change.</li>
+        <li><strong>Headless Service DNS:</strong> Allows direct resolution of individual Pod IPs.</li>
+        <li><strong>Reverse DNS:</strong> Maps Pod IPs back to their DNS names.</li>
+        <li><strong>CoreDNS:</strong> Automatically updates DNS records when Pods are recreated.</li>
+    </ul>
+</div>
