@@ -196,4 +196,3 @@ Address 1: 10.244.1.2 web-app-12345-abcde.k8-dns.pod.cluster.local</pre>
     <a href="https://github.com/kubernetes/dns" target="_blank">K8s DNS Definitions</a> for more details and
     <a href="https://github.com/kubernetes/examples/blob/master/staging/cluster-dns/README.md" target="_blank"> for a example </a> how to use Kubernetes DNS <button onclick="alert('You liked the article!')">👍 do you this article? </button>
 </div>
-    
