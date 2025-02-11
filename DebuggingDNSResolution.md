@@ -26,7 +26,7 @@ metadata:
 <!-- This is a heading line -->  
 <div class="step">
         <h3> Step 2: Create a Deployment </h3>
-        <p>Create a Deployment with 2 Pods running an nginx web server: </p>
+        <p>Create a Deployment with 2 Pods running an <code style="color : name_color"> nginx </code> web server: </p>
  </div>
  <div class="step>
        <pre lang="java">
@@ -94,7 +94,7 @@ spec:
     <div class="step">
         <h3>Step 5: Validate DNS Resolutions</h3>
         <h4>1. Forward Lookup for Service</h4>
-        <p>Resolve the Service name (web-service) to its ClusterIP:</p>
+        <p>Resolve the Service name <code style="color : name_color"> (web-service) </code> to its ClusterIP:</p>
         <pre lang="java" class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test \
             -- nslookup web-service.k8-dns.svc.cluster.local</pre>
         <p><strong>Expected Output:</strong></p> 
@@ -124,6 +124,7 @@ service/web-headless created</pre></div>
 <!-- This is a heading line -->  
   <div class="step">     
         <h3> 2. Forward Lookup for Headless Service </h3>
+  <p> Resolve the Headless Service name <code style="color : name_color"> (web-headless) </code> to individual Pod IPs: </p>
         <pre class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test \
         -- nslookup web-headless.k8-dns.svc.cluster.local</pre>
         <p><strong>Expected Output:</strong></p>  
@@ -137,7 +138,7 @@ Address 2: 10.244.1.3 web-app-67890-fghij.k8-dns.pod.cluster.local </pre>
     <div class="step"> 
           <h4>3. Reverse Lookup for Pod IPs</h4>
         <pre class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test -- nslookup &lt;pod-ip&gt;</pre>
-        <p>Replace <code>&lt;pod-ip&gt;</code> with one of the Pod IPs from the Headless Service output (e.g., 10.244.1.2).</p>
+        <p>Replace <code>&lt;pod-ip&gt;</code> with one of the Pod IPs from the Headless Service output <code style="color : name_color"> (e.g., 10.244.1.2). </code></p>
         <p><strong>Expected Output:</strong></p>
         <pre>
 Server:    10.96.0.10
@@ -148,22 +149,26 @@ Address 1: 10.244.1.2 web-app-12345-abcde.k8-dns.pod.cluster.local</pre>
 <!-- This is a heading line -->  
     <div class="step">
         <h3>Step 6: Simulate Pod Deletion and Validate DNS</h3>
-        <p>Delete one of the Pods:</p>
+        <h3>1. Delete one of the Pods:</h3>
         <pre lang="java" class="command">kubectl delete pod &lt;pod-name&gt; -n k8-dns</pre>
-        <p>The Deployment will automatically recreate the Pod with a new IP.</p>
-        <p>Validate DNS resolution again:</p>
-        <ul>
-            <li>Check the Headless Service resolution to ensure the new Pod IP is included.</li>
-            <li>Perform a reverse lookup for the new Pod IP.</li>
+            <p>The Deployment will automatically recreate the Pod with a new IP.</p>
+         <h3>2. Validate DNS resolution again:</h3>
+        <ul> 
+            <ul>
+                <li>Check the Headless Service resolution to ensure the new Pod IP is included.</li>
+                <li>Perform a reverse lookup for the new Pod IP.</li>
+            </ul>
         </ul>
     </div>
 <!-- This is a heading line -->  
 <div class="step"> 
     <h2>Key Takeaways</h2>
     <ul>
-        <li><strong>Service DNS:</strong> Provides a stable endpoint for accessing Pods, even when Pod IPs change.</li>
-        <li><strong>Headless Service DNS:</strong> Allows direct resolution of individual Pod IPs.</li>
-        <li><strong>Reverse DNS:</strong> Maps Pod IPs back to their DNS names.</li>
-        <li><strong>CoreDNS:</strong> Automatically updates DNS records when Pods are recreated.</li>
+        <ul>
+            <li><strong>Service DNS:</strong> Provides a stable endpoint for accessing Pods, even when Pod IPs change.</li>
+            <li><strong>Headless Service DNS:</strong> Allows direct resolution of individual Pod IPs.</li>
+            <li><strong>Reverse DNS:</strong> Maps Pod IPs back to their DNS names.</li>
+            <li><strong>CoreDNS:</strong> Automatically updates DNS records when Pods are recreated.</li>
+        </ul>
      </ul>
 </div>
