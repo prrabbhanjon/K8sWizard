@@ -1,12 +1,14 @@
 <!-- This is a heading line -->    
 <div class="container">
     <h1>Scenario Setup</h1>
-    <p><strong>Namespace:</strong> k8-dns </p>
-    <p><strong>Components:</strong> </p>
+    <p><strong>1. Namespace:</strong> <code style="color : name_color"> k8-dns </code></p>
+    <p><strong>2. Components:</strong> </p>
     <ul>
+        <ul>
         <li>A <strong>Deployment </strong>with 2 Pods running a simple web server. </li>
         <li>A <strong>Service </strong>to expose the Pods.</li>
         <li>A <strong>Headless Service</strong> for direct Pod DNS resolution. </li>
+        </ul>
     </ul>
     <p><strong>Objective:</strong> Validate DNS resolutions for both forward and reverse lookups.</p
 </div>
