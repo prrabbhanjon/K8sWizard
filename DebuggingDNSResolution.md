@@ -22,10 +22,11 @@ metadata:
         <pre lang="java" class="command">kubectl apply -f namespace.yaml</pre>
     </div>
 <!-- This is a heading line -->  
-    <div class="step">
+<div class="step">
         <h3> Step 2: Create a Deployment </h3>
         <p>Create a Deployment with 2 Pods running an nginx web server: </p>
-        </div>
+ </div>
+ <div class="step>
        <pre lang="java">
 apiVersion: apps/v1
 kind: Deployment
@@ -67,7 +68,7 @@ spec:
         <p>Apply the manifest:</p>
         <pre class="command">kubectl apply -f service.yaml</pre>
     </div>
-<!-- This is a heading line -->  
+<!-- This is a heading line --> 
     <div class="step">
         <h3>Step 4: Create a Headless Service </h3>
         <p>Create a Headless Service for direct Pod DNS resolution:</p> 
