@@ -86,7 +86,7 @@ spec:
   - port: 80
     targetPort: 80</pre>
         <p>Apply the manifest:</p>
-        <pre lang="java"class="command">kubectl apply -f headless-service.yaml</pre>
+        <pre lang="java" class="command">kubectl apply -f headless-service.yaml</pre>
     </div>
 <!-- This is a heading line -->  
     <div class="step">
@@ -102,6 +102,23 @@ Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
 Name:      web-service.k8-dns.svc.cluster.local
 Address 1: 10.96.123.45 web-service.k8-dns.svc.cluster.local</pre>
 </div>
+<!-- This is a heading line -->  
+<div>
+<h3> Applying Kubernetes YAML Files in a Loop</h3>
+<p> Run the following command to apply all .yaml files in the current directory sequentially, with a 5-second pause between each:</p>
+    <pre># ls -ltr
+total 32
+-rw-r--r--@ 1 prrabbhanjon  staff  151 Feb  9 16:29 Service.yaml
+-rw-r--r--@ 1 prrabbhanjon  staff  273 Feb  9 16:29 deployment.yaml
+-rw-r--r--@ 1 prrabbhanjon  staff  170 Feb  9 16:29 headless-service.yaml
+-rw-r--r--@ 1 prrabbhanjon  staff   56 Feb  9 16:29 1-namespace.yaml</pre>
+<pre class="command">
+#for file in *.yaml; do kubectl apply -f $file; sleep 5; done  
+namespace/k8-dns created
+service/web-service created
+deployment.apps/web-app created
+service/web-headless created</pre></div>
+    
 <!-- This is a heading line -->  
   <div class="step">     
         <h3> 2. Forward Lookup for Headless Service </h3>
