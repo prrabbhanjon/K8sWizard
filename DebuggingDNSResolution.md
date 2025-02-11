@@ -1,13 +1,14 @@
 <div class="container">
     <h1>Scenario Setup</h1>
-    <p><strong>Namespace:</strong> k8-dns</p>
-    <p><strong>Components:</strong></p>
+    <p><strong>Namespace:</strong> k8-dns </p>
+    <p><strong>Components:</strong> </p>
     <ul>
-        <li>A Deployment with 2 Pods running a simple web server.</li>
+        <li>A Deployment with 2 Pods running a simple web server. </li>
         <li>A Service to expose the Pods.</li>
-        <li>A Headless Service for direct Pod DNS resolution.</li>
+        <li>A Headless Service for direct Pod DNS resolution. </li>
     </ul>
     <p><strong>Objective:</strong> Validate DNS resolutions for both forward and reverse lookups.</p>
+</div>
     <div class="step">
         <h3>Step 1: Create the Namespace</h3>
         <pre lang="java">
@@ -19,10 +20,10 @@ metadata:
         <p>Apply the manifest:</p>
         <pre lang="java" class="command">kubectl apply -f namespace.yaml</pre>
     </div>
-
     <div class="step">
-        <h3>Step 2: Create a Deployment</h3>
-        <p>Create a Deployment with 2 Pods running an nginx web server:</p>
+        <h3> Step 2: Create a Deployment </h3>
+        <p>Create a Deployment with 2 Pods running an nginx web server: </p>
+        </div>
         <pre lang="java">
 apiVersion: apps/v1
 kind: Deployment
