@@ -66,7 +66,7 @@ spec:
   - port: 80
     targetPort: 80</pre>
         <p>Apply the manifest:</p>
-        <pre class="command">kubectl apply -f service.yaml</pre>
+        <pre lang="java" class="command">kubectl apply -f service.yaml</pre>
     </div>
 <!-- This is a heading line --> 
     <div class="step">
