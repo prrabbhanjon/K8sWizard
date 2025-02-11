@@ -15,8 +15,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: k8-dns
-        </pre>
+  name: k8-dns </pre>
         <p>Apply the manifest:</p>
         <pre lang="java" class="command">kubectl apply -f namespace.yaml</pre>
     </div>
@@ -24,7 +23,7 @@ metadata:
         <h3> Step 2: Create a Deployment </h3>
         <p>Create a Deployment with 2 Pods running an nginx web server: </p>
         </div>
-        <pre lang="java">
+       <pre lang="java">
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -42,12 +41,10 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx
-        </pre>
+        image: nginx</pre>
         <p>Apply the manifest:</p>
         <pre lang="java" class="command">kubectl apply -f deployment.yaml</pre>
     </div>
-
     <div class="step">
         <h3>Step 3: Create a Service</h3>
         <p>Create a Service to expose the Pods:</p>
@@ -62,8 +59,7 @@ spec:
     app: web
   ports:
   - port: 80
-    targetPort: 80
-        </pre>
+    targetPort: 80</pre>
         <p>Apply the manifest:</p>
         <pre class="command">kubectl apply -f service.yaml</pre>
     </div>
@@ -71,7 +67,7 @@ spec:
     <div class="step">
         <h3>Step 4: Create a Headless Service</h3>
         <p>Create a Headless Service for direct Pod DNS resolution:</p>
-        <pre>
+        <pre lang="java">
 apiVersion: v1
 kind: Service
 metadata:
@@ -86,21 +82,20 @@ spec:
     targetPort: 80
         </pre>
         <p>Apply the manifest:</p>
-        <pre class="command">kubectl apply -f headless-service.yaml</pre>
+        <pre lang="java"class="command">kubectl apply -f headless-service.yaml</pre>
     </div>
 
     <div class="step">
         <h3>Step 5: Validate DNS Resolutions</h3>
         <h4>1. Forward Lookup for Service</h4>
         <p>Resolve the Service name (web-service) to its ClusterIP:</p>
-        <pre class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test -- nslookup web-service.k8-dns.svc.cluster.local</pre>
+        <pre lang="java" class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test -- nslookup web-service.k8-dns.svc.cluster.local</pre>
         <p><strong>Expected Output:</strong></p>
         <pre>
 Server:    10.96.0.10
 Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
 Name:      web-service.k8-dns.svc.cluster.local
-Address 1: 10.96.123.45 web-service.k8-dns.svc.cluster.local
-        </pre>
+Address 1: 10.96.123.45 web-service.k8-dns.svc.cluster.local</pre>
 
         <h4>2. Forward Lookup for Headless Service</h4>
         <pre class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test -- nslookup web-headless.k8-dns.svc.cluster.local</pre>
@@ -121,8 +116,7 @@ Address 2: 10.244.1.3 web-app-67890-fghij.k8-dns.pod.cluster.local
 Server:    10.96.0.10
 Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
 Name:      2.1.244.10.in-addr.arpa
-Address 1: 10.244.1.2 web-app-12345-abcde.k8-dns.pod.cluster.local
-        </pre>
+Address 1: 10.244.1.2 web-app-12345-abcde.k8-dns.pod.cluster.local</pre>
     </div>
 
     <div class="step">
