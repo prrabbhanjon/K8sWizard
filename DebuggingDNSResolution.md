@@ -191,3 +191,6 @@ Address 1: 10.244.1.2 web-app-12345-abcde.k8-dns.pod.cluster.local</pre>
         </ul>
      </ul>
 </div>
+<div>
+     <a href="https://github.com/kubernetes/dns/blob/master/docs/specification.md" target="_blank">DNS Record Definitions</a> for more details ||
+    <a href="https://github.com/kubernetes/dns" target="_blank">K8s DNS Definitions</a> for more details </div>
