@@ -108,9 +108,9 @@ Address 1: 10.96.123.45 web-service.k8-dns.svc.cluster.local</pre>
 <p> Run the following command to apply all .yaml files in the current directory sequentially, with a 5-second pause between each:</p>
     <pre># ls -ltr
 total 32
--rw-r--r--@ 1 prrabbhanjon  staff  151 Feb  9 16:29 Service.yaml
--rw-r--r--@ 1 prrabbhanjon  staff  273 Feb  9 16:29 deployment.yaml
--rw-r--r--@ 1 prrabbhanjon  staff  170 Feb  9 16:29 headless-service.yaml
+-rw-r--r--@ 1 prrabbhanjon  staff  151 Feb  9 16:29 4-Service.yaml
+-rw-r--r--@ 1 prrabbhanjon  staff  273 Feb  9 16:29 3-deployment.yaml
+-rw-r--r--@ 1 prrabbhanjon  staff  170 Feb  9 16:29 2-headless-service.yaml
 -rw-r--r--@ 1 prrabbhanjon  staff   56 Feb  9 16:29 1-namespace.yaml</pre>
 <pre class="command">
 #for file in *.yaml; do kubectl apply -f $file; sleep 5; done  
