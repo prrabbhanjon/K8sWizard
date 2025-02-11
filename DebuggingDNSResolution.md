@@ -1,3 +1,4 @@
+<!-- This is a heading line -->    
 <div class="container">
     <h1>Scenario Setup</h1>
     <p><strong>Namespace:</strong> k8-dns </p>
@@ -7,8 +8,9 @@
         <li>A Service to expose the Pods.</li>
         <li>A Headless Service for direct Pod DNS resolution. </li>
     </ul>
-    <p><strong>Objective:</strong> Validate DNS resolutions for both forward and reverse lookups.</p>
+    <p><strong>Objective:</strong> Validate DNS resolutions for both forward and reverse lookups.</p
 </div>
+<!-- This is a heading line -->  
     <div class="step">
         <h3>Step 1: Create the Namespace</h3>
         <pre lang="java">
@@ -19,6 +21,7 @@ metadata:
         <p>Apply the manifest:</p>
         <pre lang="java" class="command">kubectl apply -f namespace.yaml</pre>
     </div>
+<!-- This is a heading line -->  
     <div class="step">
         <h3> Step 2: Create a Deployment </h3>
         <p>Create a Deployment with 2 Pods running an nginx web server: </p>
@@ -45,6 +48,7 @@ spec:
         <p>Apply the manifest:</p>
         <pre lang="java" class="command">kubectl apply -f deployment.yaml</pre>
     </div>
+<!-- This is a heading line -->  
     <div class="step">
         <h3>Step 3: Create a Service</h3>
         <p>Create a Service to expose the Pods:</p>
@@ -63,10 +67,10 @@ spec:
         <p>Apply the manifest:</p>
         <pre class="command">kubectl apply -f service.yaml</pre>
     </div>
-
+<!-- This is a heading line -->  
     <div class="step">
-        <h3>Step 4: Create a Headless Service</h3>
-        <p>Create a Headless Service for direct Pod DNS resolution:</p>
+        <h3>Step 4: Create a Headless Service </h3>
+        <p>Create a Headless Service for direct Pod DNS resolution:</p> 
         <pre lang="java">
 apiVersion: v1
 kind: Service
@@ -79,12 +83,11 @@ spec:
     app: web
   ports:
   - port: 80
-    targetPort: 80
-        </pre>
+    targetPort: 80</pre>
         <p>Apply the manifest:</p>
         <pre lang="java"class="command">kubectl apply -f headless-service.yaml</pre>
     </div>
-
+<!-- This is a heading line -->  
     <div class="step">
         <h3>Step 5: Validate DNS Resolutions</h3>
         <h4>1. Forward Lookup for Service</h4>
@@ -118,7 +121,7 @@ Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
 Name:      2.1.244.10.in-addr.arpa
 Address 1: 10.244.1.2 web-app-12345-abcde.k8-dns.pod.cluster.local</pre>
     </div>
-
+<!-- This is a heading line -->  
     <div class="step">
         <h3>Step 6: Simulate Pod Deletion and Validate DNS</h3>
         <p>Delete one of the Pods:</p>
@@ -130,7 +133,7 @@ Address 1: 10.244.1.2 web-app-12345-abcde.k8-dns.pod.cluster.local</pre>
             <li>Perform a reverse lookup for the new Pod IP.</li>
         </ul>
     </div>
-
+<!-- This is a heading line -->  
     <h2>Key Takeaways</h2>
     <ul>
         <li><strong>Service DNS:</strong> Provides a stable endpoint for accessing Pods, even when Pod IPs change.</li>
