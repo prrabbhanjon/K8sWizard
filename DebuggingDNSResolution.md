@@ -91,20 +91,6 @@ spec:
         <pre lang="java" class="command">kubectl apply -f headless-service.yaml</pre>
     </div>
 <!-- This is a heading line -->  
-    <div class="step">
-        <h3>Step 5: Validate DNS Resolutions</h3>
-        <h4>1. Forward Lookup for Service</h4>
-        <p>Resolve the Service name <code style="color : name_color"> (web-service) </code> to its ClusterIP:</p>
-        <pre lang="java" class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test \
-            -- nslookup web-service.k8-dns.svc.cluster.local</pre>
-        <p><strong>Expected Output:</strong></p> 
-        <pre>
-Server:    10.96.0.10
-Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
-Name:      web-service.k8-dns.svc.cluster.local
-Address 1: 10.96.123.45 web-service.k8-dns.svc.cluster.local</pre>
-</div>
-<!-- This is a heading line -->  
 <div>
 <h3> Applying Kubernetes YAML Files in a Loop</h3>
 <p> Run the following command to apply all .yaml files in the current directory sequentially, with a 5-second pause between each:</p>
@@ -139,6 +125,20 @@ deployment.apps/web-app   2/2     2            2           53m
 NAME                                 DESIRED   CURRENT   READY   AGE
 replicaset.apps/web-app-65d846d465   2         2         2       53m
         </pre>
+</div>
+<!-- This is a heading line -->  
+    <div class="step">
+        <h3>Step 5: Validate DNS Resolutions</h3>
+        <h4>1. Forward Lookup for Service</h4>
+        <p>Resolve the Service name <code style="color : name_color"> (web-service) </code> to its ClusterIP:</p>
+        <pre lang="java" class="command">kubectl run -it --rm --image=busybox:1.28 --restart=Never --namespace=k8-dns dns-test \
+            -- nslookup web-service.k8-dns.svc.cluster.local</pre>
+        <p><strong>Expected Output:</strong></p> 
+        <pre>
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+Name:      web-service.k8-dns.svc.cluster.local
+Address 1: 10.96.123.45 web-service.k8-dns.svc.cluster.local</pre>
 </div>
 <!-- This is a heading line -->  
   <div class="step">     
